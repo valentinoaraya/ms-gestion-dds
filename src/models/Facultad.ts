@@ -65,7 +65,6 @@ export class Facultad implements IFacultad {
             contacto: this.contacto,
             email: this.email,
             universidadId: this.universidadId,
-            especialidades: this.especialidades
         }
     }
 }

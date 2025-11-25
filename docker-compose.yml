@@ -1,0 +1,28 @@
+version: "3.5"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms_gestion_backend
+
+    env_file:
+      - .env
+
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql-servidor:5432/${POSTGRES_DB}?schema=public"
+
+    networks:
+      - mired
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ms_gestion.rule=Host(`api.universidad.localhost`)"
+      - "traefik.http.routers.ms_gestion.entrypoints=websecure"
+      - "traefik.http.routers.ms_gestion.tls=true"
+      - "traefik.http.services.ms_gestion.loadbalancer.server.port=5003"
+      - "traefik.docker.network=mired"
+networks:
+  mired:
+    external: true

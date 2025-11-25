@@ -2,7 +2,6 @@ export interface IUniversidad {
     id?: number;
     nombre: string;
     sigla: string;
-    facultades?: IFacultad[];
 }
 
 export interface IFacultad {
@@ -19,11 +18,9 @@ export interface IFacultad {
     contacto: string;
     universidadId?: number;
     universidad?: IUniversidad;
-    especialidades?: IEspecialidad[];
 }
 
 export interface IEspecialidad {
     id?: number;
     nombre: string;
-    facultades?: IFacultad[];
 }
