@@ -7,31 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Universidad {
-  id        Int        @id @default(autoincrement())
-  nombre    String
-  sigla     String
-  facultades Facultad[]
+model Universidades {
+  id         Int          @id @default(autoincrement())
+  nombre     String
+  sigla      String
+  facultades Facultades[]
 }
 
-model Facultad {
-  id             Int            @id @default(autoincrement())
-  nombre         String
-  abreviatura    String
-  directorio     String
-  sigla          String
-  ciudad         String
-  codigoPostal   String
-  telefono       String
-  domicilio      String
-  email          String
-  contacto       String
+model Facultades {
+  id           Int    @id @default(autoincrement())
+  nombre       String
+  abreviatura  String
+  directorio   String
+  sigla        String
+  ciudad       String
+  codigoPostal String
+  telefono     String
+  domicilio    String
+  email        String
+  contacto     String
 
-  universidadId  Int
-  universidad    Universidad  @relation(fields: [universidadId], references: [id])
+  universidadId Int
+  universidad   Universidades @relation(fields: [universidadId], references: [id])
 }
 
-model Especialidad {
-  id          Int          @id @default(autoincrement())
-  nombre      String
+model Especialidades {
+  id     Int    @id @default(autoincrement())
+  nombre String
 }

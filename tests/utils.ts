@@ -33,8 +33,6 @@ export const crearEntidadesPadre = async () => {
     const especialidad = await prisma.especialidades.create({
         data: {
             nombre: "Ingeniería en Sistemas",
-            letra: "A",
-            observacion: "Existe la ingeniería"
         }
     });
 
