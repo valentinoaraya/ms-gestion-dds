@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -15,29 +8,30 @@ datasource db {
 }
 
 model Universidad {
-  id         Int        @id @default(autoincrement())
-  nombre     String
-  sigla      String
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  sigla     String
   facultades Facultad[]
 }
 
 model Facultad {
-  id            Int         @id @default(autoincrement())
-  nombre        String
-  abreviatura   String
-  directorio    String
-  sigla         String
-  ciudad        String
-  codigoPostal  String
-  telefono      String
-  domicilio     String
-  email         String
-  contacto      String
-  universidadId Int
-  universidad   Universidad @relation(fields: [universidadId], references: [id])
+  id             Int            @id @default(autoincrement())
+  nombre         String
+  abreviatura    String
+  directorio     String
+  sigla          String
+  ciudad         String
+  codigoPostal   String
+  telefono       String
+  domicilio      String
+  email          String
+  contacto       String
+
+  universidadId  Int
+  universidad    Universidad  @relation(fields: [universidadId], references: [id])
 }
 
 model Especialidad {
-  id     Int    @id @default(autoincrement())
-  nombre String
+  id          Int          @id @default(autoincrement())
+  nombre      String
 }

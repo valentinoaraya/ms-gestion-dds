@@ -12,7 +12,6 @@ export class Especialidad implements IEspecialidad {
     }
 
     get nombre(): string { return this._nombre; }
-    get facultades(): IFacultad[] { return this._facultades; }
 
     agregarFacultad(facultad: IFacultad): void {
         this._facultades.push(facultad);
@@ -21,7 +20,6 @@ export class Especialidad implements IEspecialidad {
     toPlainObject() {
         return {
             nombre: this.nombre,
-            facultades: this.facultades,
         };
     }
 }
