@@ -8,7 +8,7 @@ services:
     container_name: ms_gestion_backend
 
     env_file:
-      - .env
+      - .env.production
 
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql-servidor:5432/${POSTGRES_DB}?schema=public"
