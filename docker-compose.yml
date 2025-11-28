@@ -1,11 +1,14 @@
 version: "3.5"
 
 services:
-  backend:
+  ms_gestion:
+    image: ms_gestion:v1.0.0
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms_gestion_backend
+
+    deploy:
+      replicas: 2
 
     env_file:
       - .env.production
