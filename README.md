@@ -26,3 +26,9 @@ DATABASE_URL="postgresql://anfatitofa:fatotifaan1504141503@postgresql-servidor:5
 
 REDIS_URL="redis://redis-servidor:6379"
 ```
+## Para correr los test
+
+```bash
+export $(cat .env.development | xargs)
+npm test
+```
