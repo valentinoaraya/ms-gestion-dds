@@ -17,16 +17,23 @@ services:
       REDIS_URL: "redis://${REDIS_HOST}:${REDIS_PORT}"
 
     networks:
-      - mired
+      mired:
+        aliases:
+          - academica.universidad.localhost
+    
 
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.ms_gestion_academica.rule=Host(`api.universidad.localhost`)"
-      - "traefik.http.routers.ms_gestion_academica.entrypoints=websecure"
-      - "traefik.http.routers.ms_gestion_academica.tls=true"
-      - "traefik.http.services.ms_gestion_academica.loadbalancer.server.port=5003"
-      - "traefik.docker.network=mired"
-      # Patron Circuit Breaker
+       - "traefik.enable=true"
+       - "traefik.http.routers.ms_gestion_academica.rule=Host(`academica.universidad.localhost`)"
+       - "traefik.http.routers.ms_gestion_academica.tls=true"
+       - "traefik.http.services.ms_gestion_academica.loadbalancer.server.port=5003"
+       # Patron Circuit Breaker
+       - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+       - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+       - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+       - "traefik.http.middlewares.ms_gestion_academica.retry.attempts=4"
+       - "traefik.http.middlewares.ms_gestion_academica.retry.initialinterval=100ms"            
+       - "traefik.docker.network=mired"
     
 
 networks:
