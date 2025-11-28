@@ -1,8 +1,7 @@
-version: "3.5"
 
 services:
-  ms_gestion:
-    image: ms_gestion:v1.0.0
+  ms_gestion_academica:
+    image: ms_gestion_academica:v1.0.0
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,10 +20,10 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ms_gestion.rule=Host(`api.universidad.localhost`)"
-      - "traefik.http.routers.ms_gestion.entrypoints=websecure"
-      - "traefik.http.routers.ms_gestion.tls=true"
-      - "traefik.http.services.ms_gestion.loadbalancer.server.port=5003"
+      - "traefik.http.routers.ms_gestion_academica.rule=Host(`api.universidad.localhost`)"
+      - "traefik.http.routers.ms_gestion_academica.entrypoints=websecure"
+      - "traefik.http.routers.ms_gestion_academica.tls=true"
+      - "traefik.http.services.ms_gestion_academica.loadbalancer.server.port=5003"
       - "traefik.docker.network=mired"
 networks:
   mired:
