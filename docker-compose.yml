@@ -14,6 +14,7 @@ services:
 
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql-servidor:5432/${POSTGRES_DB}?schema=public"
+      REDIS_URL: "redis://${REDIS_HOST}:${REDIS_PORT}"
 
     networks:
       - mired
@@ -25,6 +26,9 @@ services:
       - "traefik.http.routers.ms_gestion_academica.tls=true"
       - "traefik.http.services.ms_gestion_academica.loadbalancer.server.port=5003"
       - "traefik.docker.network=mired"
+      # Patron Circuit Breaker
+    
+
 networks:
   mired:
     external: true

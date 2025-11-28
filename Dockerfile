@@ -11,6 +11,6 @@ RUN npx prisma generate || true
 
 RUN npm run build
 
-EXPOSE 5000
+EXPOSE 5003
 
 CMD ["npm", "run", "start"]
