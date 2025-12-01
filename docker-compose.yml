@@ -1,4 +1,3 @@
-
 services:
   ms_gestion_academica:
     image: ms_gestion_academica:v1.0.0
