@@ -7,7 +7,6 @@
     "test": "NODE_ENV=development jest",
     "build": "tsc",
     "start": "node dist/index.js"
-
   },
   "keywords": [],
   "author": "",
