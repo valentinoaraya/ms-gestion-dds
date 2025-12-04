@@ -30,12 +30,9 @@ services:
        # Patron Circuit Breaker
        - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
        - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
-       - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
-       - "traefik.http.middlewares.ms_gestion_academica.retry.attempts=4"
-       - "traefik.http.middlewares.ms_gestion_academica.retry.initialinterval=100ms"            
+       - "traefik.http.middlewares.ms_gestion_academica.circuitbreaker.expression=NetworkErrorRatio() > 0.5"         
        - "traefik.docker.network=mired"
-    
-
+       
 networks:
   mired:
     external: true
