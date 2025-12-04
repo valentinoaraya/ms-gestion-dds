@@ -1,10 +1,7 @@
-
 import { Especialidad } from "../src/models/Especialidad";
 import { Facultad } from "../src/models/Facultad";
 import { Universidad } from "../src/models/Universidad";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../src/lib/prisma"
 
 export const crearEntidadesPadre = async () => {
     const universidad = await prisma.universidades.create({
@@ -33,6 +30,7 @@ export const crearEntidadesPadre = async () => {
     const especialidad = await prisma.especialidades.create({
         data: {
             nombre: "Ingeniería en Sistemas",
+            facultadId: facultad.id
         }
     });
 
@@ -77,3 +75,9 @@ export const instanciaUniversidad = new Universidad(
 export const instanciaEspecialidad = new Especialidad(
     "Ingeniería en Sistemas",
 )
+
+export const clearDatabase = async () => {
+    await prisma.especialidades.deleteMany({})
+    await prisma.facultades.deleteMany({})
+    await prisma.universidades.deleteMany({})
+}

@@ -1,6 +1,6 @@
-import { EspecialidadService } from "../../src/services/EspecialidadService"
-import { instanciaEspecialidad as especialidad } from "../utils";
-import { prisma } from "../../src/lib/prisma";
+import { EspecialidadService } from "../../../src/services/EspecialidadService"
+import { instanciaEspecialidad as especialidad } from "../../utils";
+import { prisma } from "../../../src/lib/prisma";
 
 test("Deberia crear y guardad una especialidad en la base de datos", async () => {
     const especialidadCreada = await EspecialidadService.crearEspecialidad(especialidad);

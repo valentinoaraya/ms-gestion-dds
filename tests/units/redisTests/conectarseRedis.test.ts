@@ -1,8 +1,6 @@
-import { localClient } from "../../src/lib/redis";
-
+import { localClient } from "../../../src/lib/redis";
 
 test("debería conectarse a redis sin errores", async () => {
-
     try {
         await localClient.connect();
         expect(true).toBe(true);
@@ -10,7 +8,7 @@ test("debería conectarse a redis sin errores", async () => {
     } catch (error) {
         throw new Error(`Error en la conexión: ${error}`)
 
-    }finally {
+    } finally {
         await localClient.quit();
     }
 })
