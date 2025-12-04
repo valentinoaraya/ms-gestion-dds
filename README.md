@@ -10,7 +10,7 @@ POSTGRES_USER=anfatitofa
 POSTGRES_PASSWORD=fatotifaan1504141503
 POSTGRES_DB=sysacad_db
 
-REDIS_URL="redis://localhost:6380"
+REDIS_URL="redis://:antitofaredis@localhost:6380"
 ```
 
 ## .env.production:
