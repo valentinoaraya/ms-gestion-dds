@@ -9,7 +9,7 @@ app.use(express.json())
 app.use("/api/especialidad", especialidadRouter)
 
 app.get("/", (_req, res) => {
-    res.send("Hello, World!")
+    res.send("Hola! este es el microservicio de Gestión Académica")
 })
 
 app.listen(PORT, () => {
