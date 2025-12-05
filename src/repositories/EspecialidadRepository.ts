@@ -4,7 +4,13 @@ import { prisma } from "../lib/prisma";
 
 export class EspecialidadRepository {
     protected readonly model = prisma.especialidades
-    protected readonly includes?: any;
+    protected readonly includes?: any = {
+        facultad: {
+            include: {
+                universidad: true
+            }
+        }
+    }
 
     private readonly creator: BaseCreator<IEspecialidad>
     private readonly finder: BaseFinder<IEspecialidad>

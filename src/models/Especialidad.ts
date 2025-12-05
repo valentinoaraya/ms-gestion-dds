@@ -1,25 +1,22 @@
 import { EspecialidadValidator } from "../validators/EspecialidadValidator"
-import { IEspecialidad, IFacultad } from "../types"
+import { IEspecialidad } from "../types"
 
 export class Especialidad implements IEspecialidad {
 
-    private _facultades: IFacultad[] = []
-
     constructor(
         private readonly _nombre: string,
+        private readonly _facultadId?: number,
     ) {
         EspecialidadValidator.validate(this._nombre);
     }
 
     get nombre(): string { return this._nombre; }
-
-    agregarFacultad(facultad: IFacultad): void {
-        this._facultades.push(facultad);
-    }
+    get facultadId(): number | undefined { return this._facultadId }
 
     toPlainObject() {
         return {
             nombre: this.nombre,
+            facultadId: this.facultadId,
         };
     }
 }

@@ -18,6 +18,7 @@ test("deberia guardar y buscar un dato en redis", async () => {
         throw new Error(`Error en la operacion de buscar en redis: ${error}`)
     }
     finally {
+        await localClient.flushAll()
         await localClient.quit();
     }
 })

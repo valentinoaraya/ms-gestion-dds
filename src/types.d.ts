@@ -23,4 +23,6 @@ export interface IFacultad {
 export interface IEspecialidad {
     id?: number;
     nombre: string;
+    facultadId?: number;
+    facultad?: IFacultad;
 }

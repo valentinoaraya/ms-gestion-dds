@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
-    "test": "jest",
+    "test": "jest --runInBand",
     "build": "tsc",
     "start": "node dist/index.js",
     "clear-database": "ts-node-dev src/utils/clearDatabase.ts"
