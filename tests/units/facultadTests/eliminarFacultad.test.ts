@@ -1,5 +1,5 @@
-import {FacultadService} from "../../src/services/FacultadService"
-import {crearInstanciaFacultad} from "../utils"
+import { FacultadService } from "../../../src/services/FacultadService"
+import { crearInstanciaFacultad } from "../../utils"
 
 test('Deberia eliminar una facultad', async () => {
     const facultad = await crearInstanciaFacultad();

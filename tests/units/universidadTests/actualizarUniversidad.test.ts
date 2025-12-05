@@ -1,5 +1,5 @@
-import { UniversidadService } from "../../src/services/UniversidadService"
-import { instanciaUniversidad as universidad } from "../utils"
+import { UniversidadService } from "../../../src/services/UniversidadService"
+import { instanciaUniversidad as universidad } from "../../utils"
 
 test("debería crear una Universidad en la base de datos y luego actualizar su campo sigla", async () => {
 

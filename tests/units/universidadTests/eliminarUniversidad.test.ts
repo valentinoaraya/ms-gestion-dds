@@ -1,6 +1,6 @@
-import { UniversidadService } from "../../src/services/UniversidadService";
-import { instanciaUniversidad as universidad } from "../utils";
-import { prisma } from "../../src/lib/prisma";
+import { UniversidadService } from "../../../src/services/UniversidadService";
+import { instanciaUniversidad as universidad } from "../../utils";
+import { prisma } from "../../../src/lib/prisma";
 
 test('deberia eliminar una universidad por ID de la base de datos', async () => {
     const universidadDB = await UniversidadService.crearUniversidad(universidad);

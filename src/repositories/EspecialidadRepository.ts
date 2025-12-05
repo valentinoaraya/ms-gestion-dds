@@ -1,12 +1,16 @@
-import { PrismaClient } from "@prisma/client";
 import { IEspecialidad } from "../types";
 import { BaseCreator, BaseFinder, BaseUpdater, BaseDeleter } from "./BaseRepository";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 export class EspecialidadRepository {
     protected readonly model = prisma.especialidades
-    protected readonly includes?: any;
+    protected readonly includes?: any = {
+        facultad: {
+            include: {
+                universidad: true
+            }
+        }
+    }
 
     private readonly creator: BaseCreator<IEspecialidad>
     private readonly finder: BaseFinder<IEspecialidad>

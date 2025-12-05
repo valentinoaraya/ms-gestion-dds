@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import { IUniversidad } from "../types";
 import { BaseCreator, BaseFinder, BaseUpdater, BaseDeleter } from "./BaseRepository";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 export class UniversidadRepository {
     protected readonly model = prisma.universidades;

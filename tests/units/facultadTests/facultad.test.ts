@@ -1,4 +1,4 @@
-import { instanciaFacultad as facultad } from "../utils"
+import { instanciaFacultad as facultad } from "../../utils"
 
 test("debería crear instancia de la clase facultad y leer sus atributos", () => {
 

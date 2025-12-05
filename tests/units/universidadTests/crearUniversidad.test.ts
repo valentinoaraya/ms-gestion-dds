@@ -1,6 +1,6 @@
-import { UniversidadService } from "../../src/services/UniversidadService";
-import { instanciaUniversidad as universidad } from "../utils";
-import { prisma } from "../../src/lib/prisma";
+import { UniversidadService } from "../../../src/services/UniversidadService";
+import { instanciaUniversidad as universidad } from "../../utils";
+import { prisma } from "../../../src/lib/prisma";
 
 test('deberia crear y guardar una universidad en la base de datos', async () => {
 

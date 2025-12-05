@@ -1,5 +1,5 @@
-import { FacultadService } from "../../src/services/FacultadService"
-import { crearInstanciaFacultad } from "../utils";
+import { FacultadService } from "../../../src/services/FacultadService"
+import { crearInstanciaFacultad } from "../../utils";
 
 test('deberia crear una clase de autoridad y leer sus atributos', async () => {
     const facultad = await crearInstanciaFacultad();
