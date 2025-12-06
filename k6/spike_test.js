@@ -2,7 +2,6 @@ import http from 'k6/http';
 import { Trend, Counter } from 'k6/metrics';
 import { check, sleep } from 'k6';
 
-
 const statusTrend = new Trend('status_codes');
 const responseTrend = new Trend('response_time_ms');
 const successCounter = new Counter('successful_requests');
@@ -39,7 +38,7 @@ export function teardown(data) {
 export default function () {
     
     // Usar 127.0.0.1 porque K6 tiene problemas con .localhost en macOS
-    const BASE_URL = 'https://127.0.0.1/api/especialidad';
+    const BASE_URL = 'https://academica.universidad.localhost/api/especialidad';
     
     // Headers para que Traefik sepa a qué servicio redirigir
     const params = {
