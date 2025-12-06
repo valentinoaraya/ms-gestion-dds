@@ -1,16 +1,13 @@
 import { createClient } from "redis";
 import { REDIS_URL } from "../config/config";
 
-// Crear cliente de Redis (singleton)
 export const localClient = createClient({
     url: REDIS_URL
 });
 
-// Estado de conexión
 let isConnecting = false;
 let isConnected = false;
 
-// Manejar eventos de conexión
 localClient.on('connect', () => {
     console.log('✅ Redis conectado');
     isConnected = true;
@@ -29,24 +26,21 @@ localClient.on('end', () => {
     isConnecting = false;
 });
 
-// Función helper para asegurar conexión
 export async function ensureRedisConnection() {
     if (isConnected) {
-        return; // Ya está conectado
+        return;
     }
-    
+
     if (isConnecting) {
-        // Ya se está conectando, esperar
         await new Promise(resolve => setTimeout(resolve, 100));
-        return ensureRedisConnection(); // Reintentar
+        return ensureRedisConnection();
     }
-    
+
     try {
         isConnecting = true;
         await localClient.connect();
     } catch (error: any) {
         isConnecting = false;
-        // Si el error es "Socket already opened", ignorar (ya está conectado)
         if (!error.message?.includes('Socket already opened')) {
             throw error;
         }
@@ -54,7 +48,6 @@ export async function ensureRedisConnection() {
     }
 }
 
-// Conectar al iniciar el módulo (solo una vez)
 ensureRedisConnection().catch(err => {
     console.error('⚠️  No se pudo conectar a Redis al iniciar:', err.message);
 });

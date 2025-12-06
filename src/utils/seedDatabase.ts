@@ -7,14 +7,12 @@ const seedDatabase = async () => {
     try {
         console.log("🌱 Iniciando seed de la base de datos...");
 
-        // Verificar si ya hay datos
         const existingUniversidades = await prisma.universidades.count();
         if (existingUniversidades > 0) {
             console.log("⚠️  La base de datos ya tiene datos. Usa 'npm run clear-database' primero si quieres resetear.");
             return;
         }
 
-        // Crear Universidad 1: UTN
         const utn = await prisma.universidades.create({
             data: {
                 nombre: "Universidad Tecnológica Nacional",
@@ -22,7 +20,6 @@ const seedDatabase = async () => {
             }
         });
 
-        // Crear Facultad 1
         const frsanrafael = await prisma.facultades.create({
             data: {
                 nombre: "Facultad Regional de San Rafael",
@@ -39,7 +36,6 @@ const seedDatabase = async () => {
             }
         });
 
-        // Crear Especialidades para FRSR
         await prisma.especialidades.create({
             data: {
                 nombre: "Ingeniería en Sistemas",
@@ -59,7 +55,6 @@ const seedDatabase = async () => {
             }
         });
 
-        // Crear Facultad 2
         const frbuenosaires = await prisma.facultades.create({
             data: {
                 nombre: "Facultad Regional Buenos Aires",
@@ -89,7 +84,6 @@ const seedDatabase = async () => {
             }
         });
 
-        // Crear Universidad 2: UBA
         const uba = await prisma.universidades.create({
             data: {
                 nombre: "Universidad de Buenos Aires",
@@ -126,7 +120,6 @@ const seedDatabase = async () => {
             }
         });
 
-        // Crear Universidad 3: UNC
         const unc = await prisma.universidades.create({
             data: {
                 nombre: "Universidad Nacional de Córdoba",
@@ -163,7 +156,6 @@ const seedDatabase = async () => {
             }
         });
 
-        // Contar registros creados
         const universidades = await prisma.universidades.count();
         const facultades = await prisma.facultades.count();
         const especialidades = await prisma.especialidades.count();

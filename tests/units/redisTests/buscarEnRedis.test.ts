@@ -2,7 +2,6 @@ import { localClient } from "../../../src/lib/redis";
 
 test("deberia guardar y buscar un dato en redis", async () => {
     try {
-
         const clave = "clave de prueba";
         const valor = "valor de prueba";
 
