@@ -67,7 +67,7 @@ POSTGRES_DB=sysacad_db
 REDIS_URL=redis://:antitofaredis@localhost:6380
 ```
 
-**Nota:** Asegúrate de crear los archivos `.env.development` y `.env.production` con tus credenciales antes de continuar. Puedes ver los ejemplos completos en la sección [Configuración](#-configuración).
+**Nota:** Asegúrate de crear los archivos `.env.development` y `.env.production` con tus credenciales y de tener los contenedores correspondientes de Traefik, Redis y Postgres corriendo antes de continuar. Puedes ver los ejemplos completos en la sección [Configuración](#-configuración).
 
 4. Genera el cliente de Prisma (requiere que las variables de entorno estén definidas):
 ```bash
