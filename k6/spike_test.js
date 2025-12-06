@@ -14,12 +14,10 @@ export const options = {
         { duration: "10s", target: 0 },
     ],
     thresholds: {
-        // Criterios de éxito/fallo del test
-        http_req_duration: ['p(95)<500'],    // 95% de requests < 500ms
-        http_req_failed: ['rate<0.1'],       // Menos del 10% de errores
-        'successful_requests': ['count>400'], // Al menos 400 requests exitosos (80% de ~1600 iterations)
+        http_req_duration: ['p(95)<500'],    
+        http_req_failed: ['rate<0.1'],       
+        'successful_requests': ['count>400'], 
     },
-    // Ignorar verificación de certificados SSL (desarrollo)
     insecureSkipTLSVerify: true,
 };
 
@@ -32,15 +30,11 @@ export function setup() {
 export function teardown(data) {
     console.log('\n Limpiando base de datos...\n');
     console.log(`⏱️  Test duró: ${((Date.now() - data.timestamp) / 1000).toFixed(2)} segundos\n`);
-    
 }
 
 export default function () {
-    
-    // Usar 127.0.0.1 porque K6 tiene problemas con .localhost en macOS
     const BASE_URL = 'https://academica.universidad.localhost/api/especialidad';
     
-    // Headers para que Traefik sepa a qué servicio redirigir
     const params = {
         headers: {
             'Host': 'academica.universidad.localhost'
@@ -49,7 +43,6 @@ export default function () {
 
     const especialidadIds = [1,2,3,4,5,6,7,8,9];
 
-    // Elegir un ID aleatorio de los existentes
     const randomId = especialidadIds[Math.floor(Math.random() * especialidadIds.length)];
 
     const res = http.get(`${BASE_URL}/${randomId}`, params);
@@ -57,8 +50,6 @@ export default function () {
     responseTrend.add(res.timings.duration);
     statusTrend.add(res.status);
     
-     
-    // Validaciones
     const isSuccess = check(res, {
         'status is 200 or 404': (r) => [200, 404].includes(r.status),
         'no server errors (5xx)': (r) => r.status < 500,
@@ -87,6 +78,5 @@ export default function () {
         console.log(`❌ Error: ID=${randomId}, status=${res.status}, time=${res.timings.duration.toFixed(2)}ms`);
     }
     
-    // Simular tiempo de usuario 
     sleep(Math.random() * 2 + 1);
 }
