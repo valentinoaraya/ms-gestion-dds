@@ -38,7 +38,24 @@ echo ""
 # Paso 3: Ejecutar spike test de K6
 echo -e "${YELLOW}⚡ Paso 3/4: Ejecutando spike test...${NC}"
 echo -e "${BLUE}───────────────────────────────────────────────────────────${NC}"
-k6 run k6/spike_test.js
+#k6 run k6/spike_test.js
+if command -v k6 >/dev/null 2>&1; then
+    # Linux / macOS
+    k6 run k6/spike_test.js
+
+elif [ -f "./k6.exe" ]; then
+    # Windows: ejecutar con start /wait para que devuelva el control al script
+    echo "Usando k6.exe vía cmd.exe"
+
+    cmd.exe /C "start /wait \"k6\" \"%cd%\\k6.exe\" run \"%cd%\\k6\\spike_test.js\""
+
+    
+else
+    echo -e "${RED}❌ No se encontró k6 ni k6.exe${NC}"
+    exit 1
+fi
+
+
 SPIKE_EXIT_CODE=$?
 echo -e "${BLUE}───────────────────────────────────────────────────────────${NC}"
 
