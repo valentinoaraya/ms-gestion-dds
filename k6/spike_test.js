@@ -38,7 +38,15 @@ export function teardown(data) {
 
 export default function () {
     
-    const BASE_URL = 'https://academica.universidad.localhost/api/especialidad';
+    // Usar 127.0.0.1 porque K6 tiene problemas con .localhost en macOS
+    const BASE_URL = 'https://127.0.0.1/api/especialidad';
+    
+    // Headers para que Traefik sepa a qué servicio redirigir
+    const params = {
+        headers: {
+            'Host': 'academica.universidad.localhost'
+        }
+    };
 
     const especialidadIds = [1,2,3,4,5,6,7,8,9,10];
     const nonExistentIds = [999,1000,1001];
@@ -47,7 +55,7 @@ export default function () {
     const allIds = Math.random() < 0.8 ? especialidadIds : nonExistentIds;
     const randomId = allIds[Math.floor(Math.random() * allIds.length)];
 
-    const res = http.get(`${BASE_URL}/${randomId}`);
+    const res = http.get(`${BASE_URL}/${randomId}`, params);
 
     responseTrend.add(res.timings.duration);
     statusTrend.add(res.status);

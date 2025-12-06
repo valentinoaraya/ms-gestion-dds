@@ -1,4 +1,4 @@
-import { localClient } from "../lib/redis";
+import { localClient, ensureRedisConnection } from "../lib/redis";
 import { EspecialidadRepository } from "../repositories/EspecialidadRepository";
 import { IEspecialidad } from "../types";
 export class EspecialidadService {
@@ -9,25 +9,47 @@ export class EspecialidadService {
     }
 
     static async obtenerEspecialidadPorId(id: number): Promise<IEspecialidad | null> {
-        const cacheKey = `especialidad:${id}`
-        await localClient.connect()
-        const cachedEspecialidad = await localClient.get(cacheKey)
-        if (cachedEspecialidad) {
-            return JSON.parse(cachedEspecialidad)
+        const cacheKey = `especialidad:${id}`;
+        
+        try {
+            // Asegurar que Redis esté conectado
+            await ensureRedisConnection();
+            
+            // Buscar en cache
+            const cachedEspecialidad = await localClient.get(cacheKey);
+            if (cachedEspecialidad) {
+                console.log(`🎯 Cache HIT: especialidad ${id}`);
+                return JSON.parse(cachedEspecialidad);
+            }
+            
+            console.log(`💤 Cache MISS: especialidad ${id}`);
+        } catch (error) {
+            console.error('⚠️  Error al buscar en Redis cache:', error);
+            // Continuar sin cache si Redis falla
         }
+        
+        // Buscar en base de datos
         const especialidad = await this.EspecialidadRepository.buscarPorId(id);
 
         if (especialidad) {
-            await localClient.set(cacheKey, JSON.stringify({
-                especialidad: especialidad.nombre,
-                facultad: especialidad.facultad?.nombre,
-                universidad: especialidad.facultad?.universidad?.nombre
-            }), {
-                EX: 3600
-            })
+            try {
+                // Guardar en cache
+                await localClient.set(cacheKey, JSON.stringify({
+                    especialidad: especialidad.nombre,
+                    facultad: especialidad.facultad?.nombre,
+                    universidad: especialidad.facultad?.universidad?.nombre
+                }), {
+                    EX: 3600
+                });
+                console.log(`💾 Guardado en cache: especialidad ${id}`);
+            } catch (error) {
+                console.error('⚠️  Error al guardar en Redis cache:', error);
+                // Continuar aunque falle el cache
+            }
         }
-        await localClient.quit()
-        return especialidad
+        
+        // NO hacer quit() - mantener la conexión abierta
+        return especialidad;
     }
 
     static actualizarEspecialidad(id: number, nuevosDatos: Partial<IEspecialidad>): Promise<IEspecialidad | null> {
