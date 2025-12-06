@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-    binaryTargets = ["native", "debian-openssl-1.1.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -16,26 +16,26 @@ model Universidades {
 }
 
 model Facultades {
-  id             Int    @id @default(autoincrement())
-  nombre         String
-  abreviatura    String
-  directorio     String
-  sigla          String
-  ciudad         String
-  codigoPostal   String
-  telefono       String
-  domicilio      String
-  email          String
-  contacto       String
+  id           Int    @id @default(autoincrement())
+  nombre       String
+  abreviatura  String
+  directorio   String
+  sigla        String
+  ciudad       String
+  codigoPostal String
+  telefono     String
+  domicilio    String
+  email        String
+  contacto     String
 
-  universidadId  Int
-  universidad    Universidades @relation(fields: [universidadId], references: [id])
-  
+  universidadId Int
+  universidad   Universidades @relation(fields: [universidadId], references: [id])
+
   especialidades Especialidades[]
 }
 
 model Especialidades {
-  id         Int    @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   nombre     String
   facultadId Int
   facultad   Facultades @relation(fields: [facultadId], references: [id])
