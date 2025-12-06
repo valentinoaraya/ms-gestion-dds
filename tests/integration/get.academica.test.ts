@@ -10,8 +10,6 @@ describe("Pruebas de integración para obtener datos académicos a partir de una
         const response = await request(`http://localhost:${PORT}`)
             .get(`/api/especialidad/${especialidad.id!}`)
 
-        await localClient.connect()
-
         const redisKey = `especialidad:${especialidad.id!}`
         const redisData = await localClient.get(redisKey)
 
