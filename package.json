@@ -7,7 +7,8 @@
     "test": "jest --runInBand",
     "build": "tsc",
     "start": "node dist/index.js",
-    "clear-database": "ts-node-dev src/utils/clearDatabase.ts"
+    "clear-database": "ts-node-dev src/utils/clearDatabase.ts",
+    "seed-database": "ts-node-dev src/utils/seedDatabase.ts"
   },
   "keywords": [],
   "author": "",

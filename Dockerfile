@@ -30,4 +30,4 @@ COPY --from=builder /app/prisma ./prisma
 
 EXPOSE 5003
 
-CMD npx prisma migrate deploy && node dist/src/index.js
+CMD npx prisma migrate deploy && node dist/index.js

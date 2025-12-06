@@ -8,6 +8,12 @@ export const obtenerEspecialidad = async (req: Request, res: Response): Promise<
 
         if (!especialidad) return res.status(404).json({ message: "Especialidad no encontrada" })
 
+        // no formateo porque viene de cache, es decir en formaro correcto 
+        if ('especialidad' in especialidad) {
+            return res.status(200).json(especialidad)
+        }
+
+        
         res.status(200).json({
             especialidad: especialidad.nombre,
             facultad: especialidad.facultad?.nombre,
